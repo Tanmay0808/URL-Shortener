@@ -1,0 +1,58 @@
+body{
+    margin-top: 20vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: sans-serif;
+}
+#main-container{
+    margin-top: 10vh;
+    border-radius: 5px;
+    background-color:lightgrey;
+    min-width:400px;
+    max-width: 50vw;
+    padding: 20px;
+    box-shadow: 0 3px 10px black;
+}
+#pug-container{
+    margin-top: 10vh;
+    border-radius: 5px;
+    background-color:lightgrey;
+    min-width:400px;
+    max-width: 60vw;
+    padding: 20px;
+    box-shadow: 0 3px 10px black;
+}
+.form-group input{
+    margin: 15px 0;
+}
+.card-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.example-box,
+.site{
+    align-self: center;
+    background-color: rgb(234, 245, 245);
+    padding:10px 20px;
+    border-radius: 10px;
+}
+
+/* Index.pug (Response File) */
+.outputHead{
+    margin-top: 5px;
+}
+.outputVal{
+    margin-right: 10px;
+}
+
+@media screen and (max-width:490px)
+{
+    #main-container{
+        min-width: 90vw;
+    }
+    #pug-container{
+        min-width: 80vw;
+    }
+}

@@ -49,6 +49,7 @@ app.route('/api/shorturl/new').post(function(req,res){
   flg=0;
   var myUrl = req.body.url;
   console.log(myUrl);
+  console.log((/^[https://www.]/).test(myUrl));
 
   if (!(/^[https://www.]/).test(myUrl))
   {

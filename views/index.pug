@@ -15,4 +15,4 @@ html(lang="en")
                 br
                 br
                 strong.outputVal="Short URL  :  "
-                code.output= `"${shortUrl}"`
+                a(href=`/api/shorturl/${shortUrl}`).output= shortUrl

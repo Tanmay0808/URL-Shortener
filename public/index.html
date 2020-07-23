@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container text-center" id="main-container">
-        <div class="card">
-        <div class="card-body">
+    <div class="container text-center" style="max-width: 800px;">
+        <div class="cards">
+        <div class="card-body mt-5">
             <form class="form-group" action="/api/shorturl/new" method="POST">
                 <label for="url" class="form-label">Enter URL To Be Shortened</label>
                 <input type="text" name="url" class="form-control" placeholder="Enter Valid URL">
@@ -18,7 +19,7 @@
             </form>
         </div>
         <hr>
-        <div class="card-footer">
+        <div class="cards">
             <label class="form-label" style="font-size: 16px;margin-bottom: 10px;">Example Usage</label>
             <div class="example-box">
                <p><strong>Original URL : </strong>https://www.google.com</p>

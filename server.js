@@ -4,6 +4,7 @@ var express = require('express');
 //var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var ejs = require('ejs');
+
 //MongoDB URI
 process.env.MONGO_URI='mongodb+srv://tanmay0808:%23tanmay%401999@cluster0-g4jxm.mongodb.net/cluster0?retryWrites=true&w=majority';
 
@@ -13,9 +14,9 @@ var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 const { url } = require('inspector');
-var flg;
-/** this project needs a db !! **/ 
+
 // mongoose.connect(process.env.DB_URI);
+
 try{
   mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true});
 }
@@ -36,8 +37,7 @@ var URLData = mongoose.model('URLData',URLSchema);
 
 app.use(cors());
 
-/** this project needs to parse POST bodies **/
-// you should mount the body-parser here
+//Mounting body-parser
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(__dirname + '/assets'));
@@ -46,23 +46,13 @@ app.get('/',function(req,res){
 });
 
 app.route('/api/shorturl/new').post(function(req,res){
-  flg=0;
   var myUrl = req.body.url;
-  console.log(myUrl);
-  console.log((/^[https://www.]/).test(myUrl));
-
-  if (!(/^[https://www.]/).test(myUrl))
-  {
-    flg = 1;
-    myUrl = 'https://www.' + myUrl;  
-  }
  
   //Validation Of URL
-  dns.lookup(myUrl.split('https://')[1],(error,address)=>{
+  dns.lookup(myUrl.split('https://'|'http://')[1],(error,address)=>{
       if (error){
          res.json({"error":"invalid URL"});
       }
-    console.log("Lookup Done ,No Issues");
   });
   
   //Check If Present In Databse,Else Will Save It
@@ -78,25 +68,16 @@ app.route('/api/shorturl/new').post(function(req,res){
           
           obj.save((err,data)=>{
             if (err) console.log(err.message);
-            console.log(data);
           });
         }
         else{
-          console.log("Found in dB");
           myHash = data.hash;
         }
-    
         //Setting Content For Index.pug 
         app.set('view engine','pug');
-
-        if (flg){
-          res.render('index',{originalUrl:myUrl.split('https://www.')[1], shortUrl:myHash});
-        }
-        else{
-          res.render('index',{originalUrl:myUrl, shortUrl:myHash});
-        }
-         
-      }else
+        res.render('index',{originalUrl:myUrl, shortUrl:myHash});        
+      }
+      else
       {
         console.log(err.message);
         res.send("Some went wrong, check URL and try again");
@@ -114,7 +95,6 @@ app.get('/api/shorturl/:shorturl',function(req,res){
           res.json({"error" : 'inValid Url'});
         }
         else{
-          console.log("found in db");
           res.redirect((/^[https://]/).test(data.url) ? data.url : 'https://' + data.url);
         }
       }else
@@ -124,16 +104,10 @@ app.get('/api/shorturl/:shorturl',function(req,res){
       }
     });
   
-})
-
-// your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'Hello World!'});
 });
 
-
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Node.js listening ...');
+  console.log('Node.js listening ... ');
 });
 
 module.exports = app;

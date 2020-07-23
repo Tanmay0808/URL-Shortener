@@ -5,9 +5,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var ejs = require('ejs');
 
-//MongoDB URI
-process.env.MONGO_URI='mongodb+srv://tanmay0808:%23tanmay%401999@cluster0-g4jxm.mongodb.net/cluster0?retryWrites=true&w=majority';
-
 var cors = require('cors');
 var dns = require('dns');
 var bodyParser = require('body-parser');

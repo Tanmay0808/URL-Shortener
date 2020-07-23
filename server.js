@@ -92,7 +92,7 @@ app.get('/api/shorturl/:shorturl',function(req,res){
           res.json({"error" : 'inValid Url'});
         }
         else{
-          res.redirect((/^[https://]/).test(data.url) ? data.url : 'https://' + data.url);
+          res.redirect(data.url);
         }
       }else
       {
